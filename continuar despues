@@ -1,0 +1,87 @@
+object neo{
+    var energia = 100
+
+    method saltar() = energia / 2 
+    method vitalidad() = energia / 10
+    method esElegido() = true        
+
+    method asignarEnergia(valor) {
+      energia = valor 
+    }
+}
+
+object morfeo {
+  var vitalidad = 8 
+  var estaDescansado = true 
+
+  method estaDescansado() = estaDescansado   
+  method esElegido() = false
+  method vitalidad() = vitalidad 
+
+
+    method cambiarVitalidad(valor) {
+      vitalidad = valor 
+    }
+    method saltar() {
+      vitalidad -= 1
+      estaDescansado = not estaDescansado
+    }
+}
+
+object trinity {
+    method vitalidad() = 0  
+  method esElegido() = false
+  method saltar() {
+    
+  }  
+}
+
+object nave {
+  const pasajeros =  [neo,trinity,morfeo]
+
+  method cantidadPasajeros() = pasajeros.size()
+  method pasejeroMayorVitalidad() = pasajeros.max({p => p.vitalidad()})
+
+  method pasajeroVitalidadMenor() = pasajeros.min({p => p.vitalidad()})
+  method estaEquilibrada() = not self.pasajeroVitalidadMenor().vitalidad() * 2 > self.pasejeroMayorVitalidad().vitalidad()    
+  method estaElegido() = pasajeros.any({p => p.esElegido()})  
+
+  method chocar() {
+    pasajeros.clear()
+  }
+
+  method pasajerosNoElegidos() {
+    return pasajeros.filter({p => not p.esElegido()})
+  }
+
+  method acelerar() {
+    self.pasajerosNoElegidos().forEach({p => p.saltar()})
+  }
+
+  method pasajerosValiosos() = pasajeros.filter({p => p.vitalidad() > 5})
+
+  method hayAlgunoAlHorno() = pasajeros.any({p => p.vitalidad() == 0})
+
+  method puedenEnfrentar() = pasajeros.all({p => p.vitalidad() > 2})
+
+  method listaVitalidad() = pasajeros.map({p => p.vitalidad()})
+
+  method vitalidadPromedio() = self.cantidadVitalidad() / self.cantidadPasajeros()
+
+  method vitalidadParPasajero() = pasajeros.filter({p => p.vitalidad().even()}).size()
+
+  method pasajerosElegidos() = pasajeros.filter({p => p.esElegido()})
+
+  method cantidadElegidosEnNave() = self.pasajerosElegidos().size()
+
+  method cantidadVitalidad() = pasajeros.sum({p => p.vitalidad()})
+
+  method potenciaVital() = self.cantidadVitalidad() ** 2  
+
+  method listaVitalidadMenosAMayor() =  pasajeros.map()
+
+  method esmasGrandeQue(unPasajero){
+    
+  } 
+
+} // continuar despues
